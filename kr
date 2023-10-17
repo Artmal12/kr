@@ -1,0 +1,45 @@
+import random
+
+def create_matrix(n):
+    matrix = []
+    for _ in range(n):
+        row = []
+        for  _ in range(n):
+            row.append(random.randint(1, 100))
+        matrix.append(row)
+    return matrix
+
+def average_column(matrix):
+    rows = len(matrix)
+    columns = len(matrix[0])
+
+    averages = []
+    for j in range(columns):
+        column_sum = 0
+        for i in range(rows):
+            column_sum += matrix[i][j]
+        column_average = column_sum / rows
+        averages.append(column_average)
+
+    sorted_indices = sorted(range(columns), key=lambda x: averages[x])
+    sorted_matrix = [[matrix[i][j] for j in sorted_indices] for i in range(rows)]
+
+    return sorted_matrix
+
+# Вхідна розмірність масиву
+n = 3
+
+# Створення масиву
+matrix = create_matrix(n)
+
+# Виведення початкового масиву
+print('Початковий масив:')
+for row in matrix:
+    print(row)
+
+
+# Обчислення середнього значення, сортування і виведення нового масиву
+sorted_matrix = average_column(matrix)
+print('Відсортований масив:')
+for row in sorted_matrix:
+    print(row)
